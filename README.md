@@ -78,7 +78,7 @@ db = 'test'
 # data preprocessing(Data interpolation work) by PL/Python 
 
 #pl/phthon code
-
+$$
 CREATE OR REPLACE FUNCTION equipment.plpy_interp(measure_val_arr numeric[])
 RETURNS numeric[]
 AS $$
@@ -93,9 +93,10 @@ AS $$
         ts_df_interpolated = ts_df_interpolated.fillna(method='bfill') # backward fill for the first missing row
         return ts_df_interpolated['measure_val']
 $$ LANGUAGE 'plpythonu';
+$$
 
 #SQL code 
-
+$$
 DROP TABLE IF EXISTS tab1;
 CREATE TEMPORARY TABLE tab1 AS
 SELECT
@@ -107,7 +108,6 @@ SELECT
 FROM equipment.ts_data
 GROUP BY lot_id, cell_id, param_id
 DISTRIBUTED RANDOMLY ;
-
 ANALYZE tab1;
 
 insert into  equipment.ts_data_indb_ml
@@ -117,8 +117,9 @@ SELECT
        , param_id
        , timestamp_id_arr
        , equipment.plpy_interp(measure_val_arr) AS measure_val_arr -- plpython UDF
-FROM tab1
-;
+FROM tab1;
+$$
+
 # excute Data interpolation work (pl/python) 
 ./3.21_indb_ml.sh 
 
@@ -130,7 +131,7 @@ raw : Table Before Interpolation
 local_py : Interpolated with python code
 indb_py : Interpolated with pl/python & Greenplum
 ##############################################################################
-
+$$
  lot_id | cell_id | param_id | timestamp_id |   raw   | local_py | indb_py
 --------+---------+----------+--------------+---------+----------+---------
       1 |       1 |        1 |            1 | 13.3904 |  13.3904 | 13.3904
@@ -151,7 +152,7 @@ indb_py : Interpolated with pl/python & Greenplum
       1 |       1 |        1 |           14 | 10.2551 |  10.2551 | 10.2551
       1 |       1 |        1 |           15 |         |   8.3128 |  8.3128
       1 |       1 |        1 |           43 |         |   9.0967 |  9.0967
-
+$$
 
 ##################################################################################################
 #                             Interpolation performance check                                    #

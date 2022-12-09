@@ -14,7 +14,7 @@ The MPP architecture allows for parallel preprocessing and allows for faster pre
 
 Through this test, it was conducted to confirm the efficiency and rapid preprocessing of the Greenplum database preprocessing.
 
-# test
+# Please watch it in raw code mode !!!!
 
 # create test table 
 psql -d mydb -f ./load/create_ts_data.sql
@@ -26,7 +26,7 @@ equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 # create sample data set 
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
-# check sample data set (ts_data), please view RAW mode
+# check sample data set (ts_data)
 
 skon=# select * from equipment.ts_data limit 20;
 

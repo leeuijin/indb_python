@@ -26,7 +26,7 @@ equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 # create sample data set 
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
-# check sample data set (ts_data)
+# check sample data set (ts_data), please view RAW mode
 
 skon=# select * from equipment.ts_data limit 20;
 

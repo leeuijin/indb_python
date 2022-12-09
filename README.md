@@ -16,17 +16,17 @@ Through this test, it was conducted to confirm the efficiency and rapid preproce
 
 # test
 
-#create test table 
+# create test table 
 psql -d mydb -f ./load/create_ts_data.sql
 
 equipment.ts_data          : Table Before Interpolation
 equipment.ts_data_local_ml : Interpolated with python code (local server or Laptop)
 equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 
-#create sample data set 
+# create sample data set 
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
-#### check sample data set (ts_data)
+# check sample data set (ts_data)
 
 skon=# select * from equipment.ts_data limit 20;
  lot_id | cell_id | param_id | timestamp_id |    measure_val
@@ -53,12 +53,9 @@ skon=# select * from equipment.ts_data limit 20;
      15 |      16 |        8 |           12 |   9.75590315845674
 (20 rows)
 
-##################################################################################################
-#                   data preprocessing(Data interpolation work) by Python code                   #
-##################################################################################################
-
+# data preprocessing(Data interpolation work) by Python code 
 #########################
-# setting on conditions #
+#setting on conditions #
 #########################
 
 lot_num = 100
@@ -73,19 +70,15 @@ host = 'localhost'
 port = '5432'
 db = 'test'
 
-###################################
 # excute Data interpolation work  #
-###################################
 
 ./3.11_local_ml.sh OR python 3.11_local_ml.py 
 
-##################################################################################################
-#                   data preprocessing(Data interpolation work) by PL/Python                     #
-##################################################################################################
 
-###################################
-#pl/phthon code                   #
-###################################
+# data preprocessing(Data interpolation work) by PL/Python 
+
+#pl/phthon code
+
 CREATE OR REPLACE FUNCTION equipment.plpy_interp(measure_val_arr numeric[])
 RETURNS numeric[]
 AS $$
@@ -106,9 +99,7 @@ AS $$
 
 $$ LANGUAGE 'plpythonu';
 
-###################################
-#SQL code                         #
-###################################
+#SQL code 
 
 DROP TABLE IF EXISTS tab1;
 CREATE TEMPORARY TABLE tab1 AS
@@ -133,14 +124,10 @@ SELECT
        , equipment.plpy_interp(measure_val_arr) AS measure_val_arr -- plpython UDF
 FROM tab1
 ;
-###############################################
-# excute Data interpolation work (pl/python)  #
-###############################################
+# excute Data interpolation work (pl/python) 
 ./3.21_indb_ml.sh 
 
-##################################################################################################
-#             interpolated data check                                                            #
-##################################################################################################
+# interpolated data check 
 ./3.31_check_ml.sh
 
 ##############################################################################

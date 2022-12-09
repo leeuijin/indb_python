@@ -27,9 +27,8 @@ equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
 # check sample data set (ts_data)
-
+$$
 skon=# select * from equipment.ts_data limit 20;
-
  lot_id | cell_id | param_id | timestamp_id |    measure_val
 --------+---------+----------+--------------+--------------------
      15 |      16 |        7 |           93 | 5.5638489074846165
@@ -53,7 +52,7 @@ skon=# select * from equipment.ts_data limit 20;
      15 |      16 |        8 |           11 | 12.646671787090733
      15 |      16 |        8 |           12 |   9.75590315845674
 (20 rows)
-
+$$
 # data preprocessing(Data interpolation work) by Python code 
 #########################
 #setting on conditions #
@@ -85,19 +84,14 @@ RETURNS numeric[]
 AS $$
         import numpy as np
         import pandas as pd
-
         measure_val = np.array(measure_val_arr, dtype='float')
-
         ts_df = pd.DataFrame({
            'measure_val': measure_val
             })
-
         # interpolation by lot, cell, and param IDs
         ts_df_interpolated = ts_df.interpolate(method='values') # linear interploation
         ts_df_interpolated = ts_df_interpolated.fillna(method='bfill') # backward fill for the first missing row
-
         return ts_df_interpolated['measure_val']
-
 $$ LANGUAGE 'plpythonu';
 
 #SQL code 

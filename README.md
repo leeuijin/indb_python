@@ -1,7 +1,7 @@
 
 # indb_python
 
-################################ Purpose of test ################################
+#Purpose of test
 
 The data preprocessing process goes through several processes.
 
@@ -14,18 +14,16 @@ The MPP architecture allows for parallel preprocessing and allows for faster pre
 
 Through this test, it was conducted to confirm the efficiency and rapid preprocessing of the Greenplum database preprocessing.
 
-#################################################################################
 # test
-#################################################################################
 
-#### create test table 
+#create test table 
 psql -d mydb -f ./load/create_ts_data.sql
 
 equipment.ts_data          : Table Before Interpolation
 equipment.ts_data_local_ml : Interpolated with python code (local server or Laptop)
 equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 
-#### create sample data set 
+#create sample data set 
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
 #### check sample data set (ts_data)

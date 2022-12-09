@@ -50,6 +50,7 @@ skon=# select * from equipment.ts_data limit 20;
      15 |      16 |        8 |           12 |   9.75590315845674
 (20 rows)
 $$
+
 # data preprocessing(Data interpolation work) by Python code 
 #########################
 #setting on conditions #
@@ -120,6 +121,7 @@ $$
 ./3.21_indb_ml.sh 
 
 # interpolated data check 
+$$
 ./3.31_check_ml.sh
 
 ##############################################################################
@@ -127,7 +129,6 @@ raw : Table Before Interpolation
 local_py : Interpolated with python code
 indb_py : Interpolated with pl/python & Greenplum
 ##############################################################################
-$$
  lot_id | cell_id | param_id | timestamp_id |   raw   | local_py | indb_py
 --------+---------+----------+--------------+---------+----------+---------
       1 |       1 |        1 |            1 | 13.3904 |  13.3904 | 13.3904
@@ -148,7 +149,6 @@ $$
       1 |       1 |        1 |           14 | 10.2551 |  10.2551 | 10.2551
       1 |       1 |        1 |           15 |         |   8.3128 |  8.3128
       1 |       1 |        1 |           43 |         |   9.0967 |  9.0967
-$$
 
 ##################################################################################################
 #                             Interpolation performance check                                    #
@@ -156,6 +156,7 @@ $$
 execute time check :
 local_py : 800 sec
 indb_py : 44 sec
+$$
 
 ##############################################################################
 

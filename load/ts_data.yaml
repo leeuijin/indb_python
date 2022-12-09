@@ -1,0 +1,28 @@
+VERSION: 1.0.0.1
+GPLOAD:
+   INPUT:
+    - SOURCE:
+         FILE:
+           - /data/demo/3.in_db_ml/load/ts_data/lot_*.csv
+    - COLUMNS:
+      - cell_id: integer
+      - lot_id: integer
+      - measure_val: numeric
+      - param_id: integer
+      - timestamp_id: integer
+    - FORMAT: csv
+    - HEADER: true
+    - LOG_ERRORS: true
+    - ERROR_LIMIT: 50000
+   OUTPUT:
+    - TABLE: equipment.ts_data
+    - MODE: insert 
+    - MAPPING:
+       lot_id: lot_id
+       cell_id: cell_id
+       param_id: param_id
+       timestamp_id: timestamp_id
+       measure_val: measure_val
+   PRELOAD:
+    - TRUNCATE: true
+    - REUSE_TABLES: true

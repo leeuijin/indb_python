@@ -1,7 +1,4 @@
-
-# indb_python
-
-#Purpose of test
+# Purpose of test
 
 The data preprocessing process goes through several processes.
 

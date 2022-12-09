@@ -24,7 +24,7 @@ equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
 # check sample data set (ts_data)
-$$
+$
 skon=# select * from equipment.ts_data limit 20;
  lot_id | cell_id | param_id | timestamp_id |    measure_val
 --------+---------+----------+--------------+--------------------
@@ -49,7 +49,7 @@ skon=# select * from equipment.ts_data limit 20;
      15 |      16 |        8 |           11 | 12.646671787090733
      15 |      16 |        8 |           12 |   9.75590315845674
 (20 rows)
-$$
+$
 # data preprocessing(Data interpolation work) by Python code 
 #########################
 #setting on conditions #

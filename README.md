@@ -152,25 +152,21 @@ indb_py : Interpolated with pl/python & Greenplum
       1 |       1 |        1 |           43 |         |   9.0967 |  9.0967
 $$
 
-##################################################################################################
-#                             Interpolation performance check                                    #
-##################################################################################################
+
+# Interpolation performance check
+
 execute time check :
 local_py : 800 sec
 indb_py : 44 sec
 
-
-##############################################################################
-
-################################### Summary ##################################
+# Summary
 
 Greenplum's data preprocessing (interpolation) through pl/python is also efficient,
 Traditional Python preprocessing (interpolation) can reduce network and disk costs by allowing the database to be processed internally by exporting data from the database and importing data after preprocessing.
 Even in simple tests, you can see 20 times the performance difference.
 Similar performance improvements can be expected not only in interpolation but also in various tasks.
 
-##############################################################################
-
+# Comment
 If you want to code review or question
 uijinl@vmware.com
 geartec82@gmail.com

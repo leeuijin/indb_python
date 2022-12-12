@@ -74,6 +74,7 @@ db = 'test'
 
 
 # data preprocessing(Data interpolation work) by PL/Python 
+
 $$
 #pl/phthon code
 CREATE OR REPLACE FUNCTION equipment.plpy_interp(measure_val_arr numeric[])

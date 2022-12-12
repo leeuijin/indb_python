@@ -108,7 +108,8 @@ FROM equipment.ts_data
 GROUP BY lot_id, cell_id, param_id
 DISTRIBUTED RANDOMLY ;
 ANALYZE tab1;
-
+$$
+$$
 insert into  equipment.ts_data_indb_ml
 SELECT
         lot_id

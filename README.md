@@ -56,7 +56,6 @@ $$
 #########################
 #setting on conditions #
 #########################
-$$
 lot_num = 100
 cell_num = 100
 param_num = 10
@@ -67,7 +66,6 @@ password = 'changeme'
 host = 'localhost'
 port = '5432'
 db = 'test'
-$$
 
 # excute Data interpolation work  #
 

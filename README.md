@@ -13,17 +13,17 @@ Through this test, it was conducted to confirm the efficiency and rapid preproce
 
 # Please watch it in raw code mode !!!!
 
-# create test table 
+# Create test table 
 psql -d mydb -f ./load/create_ts_data.sql
 
 equipment.ts_data          : Table Before Interpolation
 equipment.ts_data_local_ml : Interpolated with python code (local server or Laptop)
 equipment.ts_data_indb_ml : Interpolated with pl/python & Greenplum
 
-# create sample data set 
+# Create sample data set 
 ./3.01_gen_ts_data.sh OR python ./3.01_gen_ts_data.py
 
-# check sample data set (ts_data)
+# Check sample data set (ts_data)
 $$
 skon=# select * from equipment.ts_data limit 20;
  lot_id | cell_id | param_id | timestamp_id |    measure_val
@@ -51,7 +51,7 @@ skon=# select * from equipment.ts_data limit 20;
 (20 rows)
 $$
 
-# data preprocessing(Data interpolation work) by Python code 
+# Data preprocessing(Data interpolation work) by Python code 
 
 #########################
 #setting on conditions #
@@ -67,12 +67,12 @@ host = 'localhost'
 port = '5432'
 db = 'test'
 
-# excute Data interpolation work  #
+# Excute Data interpolation work  #
 
 ./3.11_local_ml.sh OR python 3.11_local_ml.py 
 
 
-# data preprocessing(Data interpolation work) by PL/Python 
+# Data preprocessing(Data interpolation work) by PL/Python 
 
 $$
 #pl/phthon code
@@ -117,10 +117,10 @@ SELECT
 FROM tab1;
 $$
 
-# excute Data interpolation work (pl/python) 
+# Excute Data interpolation work (pl/python) 
 ./3.21_indb_ml.sh 
 
-# interpolated data check
+# Interpolated data check
 
 $$
 ./3.31_check_ml.sh

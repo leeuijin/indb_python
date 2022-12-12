@@ -93,7 +93,8 @@ AS $$
 $$ LANGUAGE 'plpythonu';
 $$
 
-# SQL code 
+# SQL code
+
 $$
 DROP TABLE IF EXISTS tab1;
 CREATE TEMPORARY TABLE tab1 AS
@@ -116,6 +117,7 @@ SELECT
        , equipment.plpy_interp(measure_val_arr) AS measure_val_arr -- plpython UDF
 FROM tab1;
 $$
+
 # excute Data interpolation work (pl/python) 
 ./3.21_indb_ml.sh 
 

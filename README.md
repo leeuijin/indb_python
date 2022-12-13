@@ -92,7 +92,7 @@ AS $$
 $$ LANGUAGE 'plpythonu';
 $$
 
-# SQL code
+# SQL code:
 
 $$
 DROP TABLE IF EXISTS tab1;

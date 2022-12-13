@@ -89,30 +89,28 @@ AS $$
 $$ LANGUAGE 'plpythonu';
 $$
 
-SQL code:
+# SQL code:
 
-$$
-DROP TABLE IF EXISTS tab1;
-CREATE TEMPORARY TABLE tab1 AS
-SELECT
+  DROP TABLE IF EXISTS tab1;
+  CREATE TEMPORARY TABLE tab1 AS
+  SELECT
        lot_id
      , cell_id
      , param_id
      , ARRAY_AGG(timestamp_id ORDER BY timestamp_id) AS timestamp_id_arr
      , ARRAY_AGG(measure_val ORDER BY timestamp_id) AS measure_val_arr
-FROM equipment.ts_data
-GROUP BY lot_id, cell_id, param_id
-DISTRIBUTED RANDOMLY ;
-ANALYZE tab1;
-insert into  equipment.ts_data_indb_ml
-SELECT
+  FROM equipment.ts_data
+  GROUP BY lot_id, cell_id, param_id
+  DISTRIBUTED RANDOMLY ;
+  ANALYZE tab1;
+  insert into  equipment.ts_data_indb_ml
+  SELECT
         lot_id
        , cell_id
        , param_id
        , timestamp_id_arr
        , equipment.plpy_interp(measure_val_arr) AS measure_val_arr -- plpython UDF
-FROM tab1;
-$$
+  FROM tab1;
 
 # Excute Data interpolation work (pl/python) 
 ./3.21_indb_ml.sh 

@@ -90,7 +90,7 @@ $$ LANGUAGE 'plpythonu';
 $$
 
 # SQL code:
-  $$
+
   DROP TABLE IF EXISTS tab1;
   CREATE TEMPORARY TABLE tab1 AS
   SELECT
@@ -111,7 +111,7 @@ $$
        , timestamp_id_arr
        , equipment.plpy_interp(measure_val_arr) AS measure_val_arr -- plpython UDF
   FROM tab1;
-  $$
+
 # Excute Data interpolation work (pl/python) 
 ./3.21_indb_ml.sh 
 

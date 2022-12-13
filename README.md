@@ -53,19 +53,19 @@ $$
 
 # Data preprocessing(Data interpolation work) by Python code 
 
-#########################
-#setting on conditions #
-#########################
-lot_num = 100
-cell_num = 100
-param_num = 10
+ #########################
+ #setting on conditions #
+ #########################
+ lot_num = 100
+ cell_num = 100
+ param_num = 10
 
-#%% Greenplum credentials
-user = 'gpadmin'
-password = 'changeme'
-host = 'localhost'
-port = '5432'
-db = 'test'
+ #%% Greenplum credentials
+ user = 'gpadmin'
+ password = 'changeme'
+ host = 'localhost'
+ port = '5432'
+ db = 'test'
 
 # Excute Data interpolation work  #
 

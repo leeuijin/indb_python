@@ -52,10 +52,7 @@ skon=# select * from equipment.ts_data limit 20;
 $$
 
 # Data preprocessing(Data interpolation work) by Python code 
-
- #########################
  #setting on conditions #
- #########################
  lot_num = 100
  cell_num = 100
  param_num = 10
